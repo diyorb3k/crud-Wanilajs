@@ -1,7 +1,7 @@
 const { createStore } = require('redux');
 
 const ADD_TODO = 'ADD_TODO'; 
-const REMOVE_TODO = 'REMOVE_TODO'; 
+const DELET_TODO = 'REMOVE_TODO'; 
 const UPDATE_TODO = 'UPDATE_TODO'; 
 const GET_TODOS = 'GET_TODOS'; 
 
@@ -11,8 +11,8 @@ const addTodo = (task) => ({
 });
 
 
-const removeTodo = (id) => ({
-  type: REMOVE_TODO,
+const daletTodo = (id) => ({
+  type: DELET_TODO,
   payload: id 
 });
 
@@ -34,7 +34,7 @@ const todoReducer = (state = initialState, action) => {
     case ADD_TODO:
       return { ...state, todos: [...state.todos, action.payload] }; 
 
-    case REMOVE_TODO:
+    case DELET_TODO:
       return { ...state, todos: state.todos.filter(todo => todo.id !== action.payload) }; 
 
     case UPDATE_TODO:
@@ -61,5 +61,5 @@ store.subscribe(() => console.log('State yangilandi:', store.getState()));
 store.dispatch(addTodo('lorem')); 
 store.dispatch(getTodos()); 
 // store.dispatch(updateTodo(1, 'Learn Redux Basics'));
-// store.dispatch(removeTodo(1)); 
+// store.dispatch(daletTodo(1)); 
 // store.dispatch(getTodos()); 
