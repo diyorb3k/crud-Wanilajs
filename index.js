@@ -1,23 +1,24 @@
 const { createStore } = require('redux');
 
-const ADD_TODO = 'ADD_TODO';
-const DALET_TODO = 'DALET_TODO';
-const EDIT_TODO = 'EDIT_TODO'; 
-const GET_TODOS = 'GET_TODOS';
+const ADD_TODO = 'ADD_TODO'; 
+const REMOVE_TODO = 'REMOVE_TODO'; 
+const UPDATE_TODO = 'UPDATE_TODO'; 
+const GET_TODOS = 'GET_TODOS'; 
 
 const addTodo = (task) => ({
   type: ADD_TODO,
-  payload: { id: Date.now(), task }
+  payload: { id: Date.now(), task } 
 });
 
-const daletTodo = (id) => ({
-  type: DALET_TODO,
-  payload: id
+
+const removeTodo = (id) => ({
+  type: REMOVE_TODO,
+  payload: id 
 });
 
-const editTodo = (id, newTask) => ({
-  type: EDIT_TODO,
-  payload: { id, task: newTask }
+const updateTodo = (id, newTask) => ({
+  type: UPDATE_TODO,
+  payload: { id, task: newTask } 
 });
 
 const getTodos = () => ({
@@ -25,23 +26,23 @@ const getTodos = () => ({
 });
 
 const initialState = {
-  todos: []
+  todos: [] 
 };
 
 const todoReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TODO:
-      return { ...state, todos: [...state.todos, action.payload] };
+      return { ...state, todos: [...state.todos, action.payload] }; 
 
-    case DALET_TODO:
-      return { ...state, todos: state.todos.filter(todo => todo.id !== action.payload) };
+    case REMOVE_TODO:
+      return { ...state, todos: state.todos.filter(todo => todo.id !== action.payload) }; 
 
-    case EDIT_TODO: 
+    case UPDATE_TODO:
       return {
         ...state,
-        todos: state.todos.map(todo =>
+        todos: state.todos.map(todo => 
           todo.id === action.payload.id ? { ...todo, task: action.payload.task } : todo
-        )
+        ) 
       };
 
     case GET_TODOS:
@@ -49,7 +50,7 @@ const todoReducer = (state = initialState, action) => {
       return state;
 
     default:
-      return state;
+      return state; 
   }
 };
 
@@ -57,11 +58,8 @@ const store = createStore(todoReducer);
 
 store.subscribe(() => console.log('State yangilandi:', store.getState()));
 
-const todos = store.getState().todos;
-const firstTodoId = todos[0].id; 
-store.dispatch(addTodo('Learn Redux'));
-store.dispatch(addTodo('Build a Redux app'));
-// store.dispatch(getTodos());
-// store.dispatch(editTodo(firstTodoId, 'Learn Redux Basics')); 
-// store.dispatch(daletTodo(firstTodoId));
-// store.dispatch(getTodos());
+store.dispatch(addTodo('lorem')); 
+store.dispatch(getTodos()); 
+// store.dispatch(updateTodo(1, 'Learn Redux Basics'));
+// store.dispatch(removeTodo(1)); 
+// store.dispatch(getTodos()); 
