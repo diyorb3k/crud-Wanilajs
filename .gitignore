@@ -1,0 +1,7 @@
+# Node.js loyihalari uchun umumiy ignor qoidalari
+node_modules/  # Barcha npm modullari katalogini ignor qilish
+.env           # Maxfiy ma'lumotlarni saqlaydigan muhit sozlamalari fayli
+dist/          # Build jarayonida hosil bo'lgan fayllarni ignor qilish
+*.log          # Barcha log fayllarini ignor qilish
+.DS_Store      # MacOS operatsion tizimiga xos fayllarni ignor qilish
+node_modules/

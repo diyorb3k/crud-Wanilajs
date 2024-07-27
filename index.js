@@ -2,7 +2,7 @@ const { createStore } = require('redux');
 
 const ADD_TODO = 'ADD_TODO';
 const DALET_TODO = 'DALET_TODO';
-const EDIT_TODO = 'EDIT_TODO'; // UPDATE_TODO ni EDIT_TODO deb o'zgartirdik
+const EDIT_TODO = 'EDIT_TODO'; 
 const GET_TODOS = 'GET_TODOS';
 
 const addTodo = (task) => ({
@@ -15,7 +15,6 @@ const daletTodo = (id) => ({
   payload: id
 });
 
-// EDIT_TODO funksiyasi
 const editTodo = (id, newTask) => ({
   type: EDIT_TODO,
   payload: { id, task: newTask }
@@ -37,7 +36,7 @@ const todoReducer = (state = initialState, action) => {
     case DALET_TODO:
       return { ...state, todos: state.todos.filter(todo => todo.id !== action.payload) };
 
-    case EDIT_TODO: // Bu yerda UPDATE_TODO o'rniga EDIT_TODO ishlatiladi
+    case EDIT_TODO: 
       return {
         ...state,
         todos: state.todos.map(todo =>
@@ -59,10 +58,10 @@ const store = createStore(todoReducer);
 store.subscribe(() => console.log('State yangilandi:', store.getState()));
 
 const todos = store.getState().todos;
-const firstTodoId = todos[0].id; // Birinchi todo ID'sini olish
+const firstTodoId = todos[0].id; 
 store.dispatch(addTodo('Learn Redux'));
 store.dispatch(addTodo('Build a Redux app'));
 // store.dispatch(getTodos());
-// store.dispatch(editTodo(firstTodoId, 'Learn Redux Basics')); // TODO yangilash (edit)
-// store.dispatch(daletTodo(firstTodoId)); // TODO o'chirish
+// store.dispatch(editTodo(firstTodoId, 'Learn Redux Basics')); 
+// store.dispatch(daletTodo(firstTodoId));
 // store.dispatch(getTodos());
